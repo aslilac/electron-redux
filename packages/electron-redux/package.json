@@ -1,6 +1,6 @@
 {
 	"name": "@mckayla/electron-redux",
-	"version": "4.0.0",
+	"version": "3.0.2",
 	"author": "McKayla Washburn <mckayla@hey.com>",
 	"description": "Make sure all your stores are on the same page",
 	"keywords": [
@@ -11,7 +11,7 @@
 	"homepage": "https://github.com/aslilac/electron-redux",
 	"repository": "https://github.com/aslilac/electron-redux",
 	"bugs": "https://github.com/aslilac/electron-redux/issues",
-	"type": "module",
+	"type": "commonjs",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
 	"engines": {

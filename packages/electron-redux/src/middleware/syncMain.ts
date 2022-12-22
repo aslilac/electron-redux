@@ -55,5 +55,8 @@ export const syncMain: StoreEnhancer = (createStore: StoreCreator) => {
 
 	return (reducer, state) => {
 		return createStore(reducer, state, applyMiddleware(middleware));
+
+		// XXX: Even though this is unreachable, it fixes the type signature????
+		return ({} as unknown) as any;
 	};
 };

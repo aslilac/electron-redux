@@ -2,6 +2,7 @@
 	"extends": "@mckayla/tsconfig",
 	"compilerOptions": {
 		"lib": ["dom", "es2019"],
+		"module": "commonjs",
 		"outDir": "./build/",
 		"target": "es2019"
 	},

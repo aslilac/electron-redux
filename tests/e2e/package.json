@@ -17,6 +17,6 @@
 	"scripts": {
 		"build": "webpack",
 		"lint": "eslint .",
-		"start": "electron src/main/main.js"
+		"start": "electron ./src/main/index.js"
 	}
 }

@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { stopForwarding, validateAction } from "./actions";
 
 test("stopForwarding should cause validateAction to return false", () => {

@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { preventDoubleInitialization } from "./misc";
 
 test("calling preventDoubleInitialization twice throws", () => {

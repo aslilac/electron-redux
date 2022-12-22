@@ -27,7 +27,7 @@ export type GenericFluxAction = FluxStandardAction<
  */
 export const isFSA = (action: any): action is GenericFluxAction =>
 	_.isPlainObject(action) &&
-	_.isString(action.type) &&
+	_.isString(action["type"]) &&
 	Object.keys(action).every((key) => validActionKeys.includes(key));
 
 /**

@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { freeze, hydrate } from "./json";
 
 describe("freezing and hydrating", () => {

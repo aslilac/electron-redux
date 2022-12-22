@@ -1,1 +1,1 @@
-module.exports = require("./target/middleware/syncRenderer");
+module.exports = require("./build/middleware/syncRenderer");

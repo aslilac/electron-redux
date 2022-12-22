@@ -1,29 +1,37 @@
 {
 	"name": "@mckayla/electron-redux",
-	"version": "3.0.1",
-	"license": "MIT",
-	"main": "target/index.js",
-	"types": "target/index.d.ts",
+	"version": "4.0.0",
+	"author": "McKayla Washburn <mckayla@hey.com>",
 	"description": "Make sure all your stores are on the same page",
-	"author": "McKayla Washburn",
-	"repository": "https://github.com/partheseas/electron-redux",
-	"bugs": "https://github.com/partheseas/electron-redux/issues",
 	"keywords": [
 		"electron",
 		"redux"
 	],
+	"license": "MIT",
+	"homepage": "https://github.com/aslilac/electron-redux",
+	"repository": "https://github.com/aslilac/electron-redux",
+	"bugs": "https://github.com/aslilac/electron-redux/issues",
+	"type": "module",
+	"main": "./build/index.js",
+	"types": "./build/index.d.ts",
 	"engines": {
-		"node": ">= 12"
+		"node": ">= 14"
 	},
+	"files": [
+		"build/**",
+		"preload.d.ts",
+		"preload.js",
+		"renderer.d.ts",
+		"renderer.js"
+	],
 	"peerDependencies": {
 		"electron": ">=11.1.1",
 		"redux": ">=4.0.0"
 	},
 	"scripts": {
-		"build": "tsc -p .",
-		"fmt": "prettier --ignore-path .gitignore --write .",
+		"build": "tsc -b .",
 		"lint": "eslint .",
-		"smoke-test": "electron tests/main/main.js",
+		"prepack": "$npm_execpath run build -s",
 		"test": "jest"
 	}
 }

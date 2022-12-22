@@ -13,7 +13,7 @@ module.exports = {
 		renderer: "./src/renderer/renderer.js",
 	},
 	output: {
-		path: path.join(__dirname, "target"),
+		path: path.join(__dirname, "build/"),
 		filename: "[name].js",
 	},
 };

@@ -1,10 +1,5 @@
 import { ipcMain, webContents } from "electron";
-import {
-	applyMiddleware,
-	Middleware,
-	StoreCreator,
-	StoreEnhancer,
-} from "redux";
+import { applyMiddleware, Middleware, StoreCreator, StoreEnhancer } from "redux";
 
 import {
 	GenericFluxAction,
@@ -23,21 +18,18 @@ const middleware: Middleware = (store) => {
 	});
 
 	// When receiving an action from a renderer
-	ipcMain.on(
-		"mckayla.electron-redux.ACTION",
-		(event, action: GenericFluxAction) => {
-			const localAction = stopForwarding(action);
-			store.dispatch(localAction);
+	ipcMain.on("mckayla.electron-redux.ACTION", (event, action: GenericFluxAction) => {
+		const localAction = stopForwarding(action);
+		store.dispatch(localAction);
 
-			// Forward it to all of the other renderers
-			webContents.getAllWebContents().forEach((contents) => {
-				// Ignore the renderer that sent the action
-				if (contents.id !== event.sender.id) {
-					contents.send("mckayla.electron-redux.ACTION", localAction);
-				}
-			});
-		},
-	);
+		// Forward it to all of the other renderers
+		webContents.getAllWebContents().forEach((contents) => {
+			// Ignore the renderer that sent the action
+			if (contents.id !== event.sender.id) {
+				contents.send("mckayla.electron-redux.ACTION", localAction);
+			}
+		});
+	});
 
 	return (next) => (action) => {
 		if (validateAction(action)) {
@@ -57,6 +49,6 @@ export const syncMain: StoreEnhancer = (createStore: StoreCreator) => {
 		return createStore(reducer, state, applyMiddleware(middleware));
 
 		// XXX: Even though this is unreachable, it fixes the type signature????
-		return ({} as unknown) as any;
+		return {} as unknown as any;
 	};
 };

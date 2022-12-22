@@ -7,7 +7,7 @@ const validActionKeys = ["type", "payload", "error", "meta"];
 export interface FluxStandardAction<
 	Type extends string = string,
 	Payload = undefined,
-	Meta = undefined
+	Meta = undefined,
 > {
 	type: Type;
 	error?: boolean;
@@ -34,9 +34,7 @@ export const isFSA = (action: any): action is GenericFluxAction =>
  * stopForwarding allows you to give it an action, and it will return an
  * equivalent action that will only play in the current process
  */
-export const stopForwarding = (
-	action: GenericFluxAction,
-): GenericFluxAction => ({
+export const stopForwarding = (action: GenericFluxAction): GenericFluxAction => ({
 	...action,
 	meta: {
 		...action.meta,

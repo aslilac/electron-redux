@@ -5,6 +5,7 @@
 		"./tests/*"
 	],
 	"devDependencies": {
+		"@mckayla/prettier": "^1.0.3",
 		"eslint": "^8.30.0",
 		"eslint-config-mckayla": "^1.0.6",
 		"prettier": "^2.8.1"

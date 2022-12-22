@@ -46,8 +46,6 @@ describe("freezing and hydrating", () => {
 	});
 
 	test("freezing and hydrating an object should retain deep equality", () => {
-		expect(JSON.parse(JSON.stringify(fresh, freeze), hydrate)).toEqual(
-			fresh,
-		);
+		expect(JSON.parse(JSON.stringify(fresh, freeze), hydrate)).toEqual(fresh);
 	});
 });

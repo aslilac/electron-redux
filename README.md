@@ -7,14 +7,14 @@ electron-redux
 If you're here reading this, you're probably familiar with the usual Redux dataflow. You
 create an action, you dispatch it through your reducer, and your reducer updates your
 store based on the action.
+
 <!-- ![](https://cdn.mckayla.cloud/-/420c88951bf4468a8af84f4a738d4565/redux-flow.webp) -->
 
 ![a diagram detailing how data flows when using electron-redux](https://cdn.mckayla.cloud/-/420c88951bf4468a8af84f4a738d4565/electron-redux-flow.webp)
 
 electron-redux taps into this flow, and allows you to dispatch your actions in your main
-process *and* your renderer processes simultaneously. You just need to dispatch each action
+process _and_ your renderer processes simultaneously. You just need to dispatch each action
 once to whichever store instance is convenient, and every store will be updated.
-
 
 ## Usage
 

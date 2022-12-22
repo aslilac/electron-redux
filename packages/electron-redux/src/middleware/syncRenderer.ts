@@ -29,16 +29,18 @@ const replaceState = <S>(state: S) => ({
 	meta: { scope: "local" },
 });
 
-const wrapReducer = <S = any, A extends Action<any> = AnyAction>(
-	reducer: Reducer<S, A>,
-): Reducer<S, InternalAction | A> => (state, action) => {
-	switch (action.type) {
-		case "mckayla.electron-redux.REPLACE_STATE":
-			return (action as InternalAction).payload as S;
-		default:
-			return reducer(state, action as A);
-	}
-};
+const wrapReducer =
+	<S = any, A extends Action<any> = AnyAction>(
+		reducer: Reducer<S, A>,
+	): Reducer<S, InternalAction | A> =>
+	(state, action) => {
+		switch (action.type) {
+			case "mckayla.electron-redux.REPLACE_STATE":
+				return (action as InternalAction).payload as S;
+			default:
+				return reducer(state, action as A);
+		}
+	};
 
 const middleware: Middleware = (store) => {
 	__ElectronReduxBridge.subscribeToActions(store);
@@ -83,6 +85,6 @@ export const syncRenderer: StoreEnhancer = (createStore: StoreCreator) => {
 		return store;
 
 		// XXX: Even though this is unreachable, it fixes the type signature????
-		return (store as unknown) as any;
+		return store as unknown as any;
 	};
 };

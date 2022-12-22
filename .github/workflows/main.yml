@@ -1,29 +1,29 @@
 name: main
 
 on:
-    push:
-        branches: ["main"]
-    pull_request:
-        branches: ["**"]
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["**"]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        strategy:
-            matrix:
-                node-version: [14.x, 16.x, 18.x]
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
 
-        steps:
-            - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: ${{ matrix.node-version }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-            - run: yarn
-            - run: yarn prettier --check .
+      - run: yarn
+      - run: yarn prettier --check .
 
-            - run: yarn build
-            - run: yarn lint
-            - run: yarn test
+      - run: yarn build
+      - run: yarn lint
+      - run: yarn test

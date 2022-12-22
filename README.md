@@ -10,7 +10,7 @@ store based on the action.
 
 <!-- ![](https://cdn.mckayla.cloud/-/420c88951bf4468a8af84f4a738d4565/redux-flow.webp) -->
 
-![a diagram detailing how data flows when using electron-redux](https://cdn.mckayla.cloud/-/420c88951bf4468a8af84f4a738d4565/electron-redux-flow.webp)
+![a diagram detailing how data flows when using electron-redux](https://cdn.mckayla.cloud/-/401e0af828b84b358ca289676dc12101/electron-redux-flow.webp)
 
 electron-redux taps into this flow, and allows you to dispatch your actions in your main
 process _and_ your renderer processes simultaneously. You just need to dispatch each action

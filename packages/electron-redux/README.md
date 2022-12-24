@@ -74,15 +74,26 @@ import { syncRenderer } from "@mckayla/electron-redux/renderer";
 const store = createStore(reducer, syncRenderer);
 ```
 
+### w/ redux-thunk (or any other middleware/enhancer)
+
+Just use the `compose` function provided by Redux
+
+```javascript
+import { syncRenderer } from "@mckayla/electron-redux";
+import { applyMiddleware, compose, createStore } from "redux";
+import thunk from "redux-thunk";
+
+const store = createStore(reducer, compose(syncRenderer, applyMiddleware(thunk)));
+```
+
 ## Actions
 
-Actions **MUST** be [FSA](https://github.com/acdlite/flux-standard-action#example)-compliant,
+Actions **must** be [FSA](https://github.com/acdlite/flux-standard-action#example)-compliant,
 i.e. have a `type` and `payload` property. Any actions not passing this test will
 be ignored and simply passed through to the next middleware.
 
-> NB: `redux-thunk` is not FSA-compliant out of the box, but can still produce compatible actions once the async action fires.
-
-Actions **MUST** be serializable
+Actions **must** be serializable. electron-redux supports serializing anything that
+`JSON.stringify` can usually handle, as well as `Map` and `Set`.
 
 -   Objects with enumerable properties
 -   Arrays

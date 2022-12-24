@@ -1,2 +1,2 @@
-tests/  -linguist-detectable
+tests/**/*  -linguist-detectable
 *.config.js  -linguist-detectable

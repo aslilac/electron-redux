@@ -1,4 +1,4 @@
-const { syncRenderer } = require("@mckayla/electron-redux");
+const { syncRenderer } = require("@mckayla/electron-redux/renderer");
 const redux = require("redux");
 
 const { reducer, ...actions } = require("./common");

@@ -17,28 +17,3 @@ export const preventDoubleInitialization = () => {
 		"electron-redux was previously attached to a store here",
 	);
 };
-
-/**
- * Removes the property prop from the given object. Think of it as an actual
- * runtime implementation of the TypeScript Omit<T, K> type.
- */
-export const trimProperty = <T extends keyof X, X extends Record<string, unknown>>(
-	prop: T,
-	obj: X,
-) => {
-	return Object.fromEntries(
-		Object.entries(obj).filter(([key]) => key !== prop),
-	) as Omit<X, T>;
-};
-
-/**
- * Removes multiple properties from the given object.
- */
-export const trimProperties = <T extends keyof X, X extends Record<string, unknown>>(
-	props: T[],
-	obj: X,
-) => {
-	return Object.fromEntries(
-		Object.entries(obj).filter(([key]) => !props.includes(key as T)),
-	) as Omit<X, T>;
-};

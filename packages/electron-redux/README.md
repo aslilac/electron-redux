@@ -14,7 +14,7 @@ const store = createStore(reducer, syncMain);
 
 ```javascript
 // in the renderer processes
-import { syncRenderer } from "@mckayla/electron-redux";
+import { syncRenderer } from "@mckayla/electron-redux/renderer";
 const store = createStore(reducer, syncRenderer);
 ```
 
@@ -35,39 +35,12 @@ const view = new BrowserWindow({
 });
 ```
 
-### w/ Webpack
-
-If you use Webpack to bundle your renderer code, and you don't have `nodeIntegration`
-enabled, you might also need to prevent the electron module from being included in
-your renderer bundle. You can do this by including the following in your Webpack config.
-
-```javascript
-// in your webpack.config.js
-module.exports = {
-	resolve: {
-		alias: {
-			electron: false,
-		},
-	},
-};
-```
-
-### w/ Parcel (or Webpack)
-
-In your renderer code, you'll actually want to import the store enhancer from a submodule.
-
-```javascript
-// in your renderer processes
-import { syncRenderer } from "@mckayla/electron-redux/renderer";
-const store = createStore(reducer, syncRenderer);
-```
-
 ### w/ redux-thunk (or any other middleware/enhancer)
 
 Just use the `compose` function provided by Redux
 
 ```javascript
-import { syncRenderer } from "@mckayla/electron-redux";
+import { syncRenderer } from "@mckayla/electron-redux/renderer";
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 

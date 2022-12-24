@@ -1,8 +1,0 @@
-**/*
-!build/**/*
-tests/
-**/*.test.*
-
-!preload.js
-!renderer.d.ts
-!renderer.js

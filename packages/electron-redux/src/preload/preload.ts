@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { Action, MiddlewareAPI } from "redux";
+import type { Action, MiddlewareAPI } from "redux";
 
 import { hydrate, stopForwarding } from "../helpers";
 
@@ -17,7 +17,7 @@ declare global {
 	const __ElectronReduxBridge: Bridge;
 }
 
-export const preload = () => {
+export function preload() {
 	const bridge = {
 		getMainState,
 		subscribeToActions,
@@ -31,9 +31,9 @@ export const preload = () => {
 	} catch {
 		window.__ElectronReduxBridge = bridge;
 	}
-};
+}
 
-export async function getMainState() {
+async function getMainState() {
 	const state = await ipcRenderer
 		.invoke("mckayla.electron-redux.FETCH_STATE")
 		.catch((error) => {
@@ -50,12 +50,12 @@ export async function getMainState() {
 	return hydratedState;
 }
 
-export function subscribeToActions(store: MiddlewareAPI) {
+function subscribeToActions(store: MiddlewareAPI) {
 	ipcRenderer.on("mckayla.electron-redux.ACTION", (_, action) => {
 		store.dispatch(stopForwarding(action));
 	});
 }
 
-export function sendAction(action: Action) {
+function sendAction(action: Action) {
 	ipcRenderer.send("mckayla.electron-redux.ACTION", action);
 }

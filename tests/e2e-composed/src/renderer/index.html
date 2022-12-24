@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>electron-redux</title>
+
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/; font-src https://fonts.gstatic.com/; script-src 'self' 'unsafe-eval';"
+		/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap"
+		/>
+		<link rel="stylesheet" type="text/css" href="./renderer.css" />
+	</head>
+	<body>
+		<h1>electron-redux</h1>
+
+		<h2 id="count-display">{{count-display}}</h2>
+		<button id="count-decrement">-</button>
+		<button id="count-increment">+</button>
+		<button id="count-increment-3">+3</button>
+
+		<hr />
+
+		<p id="set-display">{{set-display}}</p>
+		<input type="text" id="set-input" value="{{set-input}}" />
+		<button id="set-confirm">+</button>
+
+		<script type="module" src="../../build/renderer.js"></script>
+	</body>
+</html>

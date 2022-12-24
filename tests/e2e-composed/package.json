@@ -1,0 +1,23 @@
+{
+	"private": true,
+	"name": "@mckayla/electron-redux-e2e-composed-test",
+	"version": "2.0.2",
+	"engines": {
+		"node": ">= 14"
+	},
+	"dependencies": {
+		"@mckayla/electron-redux": "*",
+		"redux": "^4.0.5",
+		"redux-thunk": "^2.4.2"
+	},
+	"devDependencies": {
+		"electron": "^22.0.0",
+		"webpack": "^5.75.0",
+		"webpack-cli": "^5.0.1"
+	},
+	"scripts": {
+		"build": "webpack",
+		"lint": "eslint .",
+		"start": "electron ./src/main/index.js"
+	}
+}

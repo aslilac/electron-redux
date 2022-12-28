@@ -1,6 +1,6 @@
 {
 	"name": "@mckayla/electron-redux",
-	"version": "3.0.2",
+	"version": "3.0.3",
 	"author": "McKayla Washburn <mckayla@hey.com>",
 	"description": "Make sure all your stores are on the same page",
 	"keywords": [

@@ -1,9 +1,8 @@
-const { addItem, decrement, increment, store } = require("../store/renderer");
+import { addItem, decrement, increment, store } from "./store";
 
 store.subscribe(() => {
 	const state = store.getState();
-	// eslint-disable-next-line no-console
-	console.log("state", state);
+	console.log({ state });
 	update(state);
 });
 
@@ -22,17 +21,9 @@ function update(state) {
 const h = document.querySelector("#count-display");
 const d = document.querySelector("#count-decrement");
 const i = document.querySelector("#count-increment");
-const i3 = document.querySelector("#count-increment-3");
 
-d.addEventListener("click", () => store.dispatch(decrement()));
-i.addEventListener("click", () => store.dispatch(increment()));
-i3.addEventListener("click", () =>
-	store.dispatch((dispatch) => {
-		dispatch(increment());
-		dispatch(increment());
-		dispatch(increment());
-	}),
-);
+d.addEventListener("click", () => store.dispatch(decrement));
+i.addEventListener("click", () => store.dispatch(increment));
 
 const s = document.querySelector("#set-display");
 const x = document.querySelector("#set-input");

@@ -1,33 +1,27 @@
 const init = () => ({
 	count: 0,
-	items: new Set(["a", "b", "c"]),
+	items: new Set(["a"]),
 });
 
-// type Action =
-// 	| ReturnType<typeof increment>
-// 	| ReturnType<typeof decrement>
-// 	| ReturnType<typeof adjustBy>;
-//  | ReturnType<typeof addItem>;
-
-exports.increment = () => ({
+export const increment = () => ({
 	type: "INCREMENT",
 });
 
-exports.decrement = () => ({
+export const decrement = () => ({
 	type: "DECREMENT",
 });
 
-exports.adjustBy = (amount) => ({
+export const adjustBy = (amount) => ({
 	type: "ADJUST_BY",
 	payload: { amount },
 });
 
-exports.addItem = (item) => ({
+export const addItem = (item) => ({
 	type: "ADD_ITEM",
 	payload: { item },
 });
 
-exports.reducer = (state = init(), action) => {
+export const reducer = (state = init(), action) => {
 	switch (action.type) {
 		case "INCREMENT":
 			return { ...state, count: state.count + 1 };
@@ -36,9 +30,9 @@ exports.reducer = (state = init(), action) => {
 		case "ADJUST_BY":
 			return { ...state, count: state.count + action.payload.amount };
 		case "ADD_ITEM": {
-			const copy = new Set(state.items);
-			copy.add(action.payload.item);
-			return { ...state, items: copy };
+			const itemsCopy = new Set(state.items);
+			itemsCopy.add(action.payload.item);
+			return { ...state, items: itemsCopy };
 		}
 		default:
 			return state;

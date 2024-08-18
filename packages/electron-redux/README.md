@@ -23,8 +23,7 @@ const store = createStore(reducer, syncRenderer);
 import "@mckayla/electron-redux/preload";
 ```
 
-If you don't have your own preload script, you can specify the provided preload
-script directly whenever you initialize a `BrowserWindow`
+If you don't have your own preload script, you can specify the provided preload script directly whenever you initialize a `BrowserWindow`
 
 ```javascript
 // when initializing a BrowserWindow
@@ -49,25 +48,21 @@ const store = createStore(reducer, compose(syncRenderer, applyMiddleware(thunk))
 
 ## Actions
 
-Actions **must** be [FSA](https://github.com/acdlite/flux-standard-action#example)-compliant,
-i.e. have a `type` and `payload` property. Any actions not passing this test will
-be ignored and simply passed through to the next middleware.
+Actions **must** be [FSA](https://github.com/acdlite/flux-standard-action#example)-compliant, i.e. have a `type` and `payload` property. Any actions not passing this test will be ignored and simply passed through to the next middleware.
 
-Actions **must** be serializable. electron-redux supports serializing anything that
-`JSON.stringify` can usually handle, as well as `Map` and `Set`.
+Actions **must** be serializable. electron-redux supports serializing anything that `JSON.stringify` can usually handle, as well as `Map` and `Set`.
 
--   Objects with enumerable properties
--   Arrays
--   Numbers
--   Booleans
--   Strings
--   Maps
--   Sets
+- Objects with enumerable properties
+- Arrays
+- Numbers
+- Booleans
+- Strings
+- Maps
+- Sets
 
 ### Local actions
 
-By default, all actions are played in all processes. If an action should only be
-played in the current thread, then you can set the scope meta property to local.
+By default, all actions are played in all processes. If an action should only be played in the current thread, then you can set the scope meta property to local.
 
 ```javascript
 const myLocalActionCreator = () => ({

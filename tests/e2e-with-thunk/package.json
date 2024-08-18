@@ -1,10 +1,11 @@
 {
 	"private": true,
-	"name": "@mckayla/electron-redux-e2e-test",
+	"name": "@mckayla/electron-redux-e2e-with-thunk-test",
 	"type": "module",
 	"dependencies": {
 		"@mckayla/electron-redux": "*",
-		"redux": "^5.0.1"
+		"redux": "^5.0.1",
+		"redux-thunk": "^3.1.0"
 	},
 	"devDependencies": {
 		"electron": "^31.4.0",

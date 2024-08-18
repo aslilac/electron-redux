@@ -1,5 +1,5 @@
-/// <reference types="jest" />
-import { freeze, hydrate } from "./json";
+import { describe, expect, test } from "vitest";
+import { preserve, restore } from "./json";
 
 describe("freezing and hydrating", () => {
 	const fresh = {
@@ -36,16 +36,16 @@ describe("freezing and hydrating", () => {
 			["C", "c"],
 		]);
 
-		expect(JSON.stringify(map, freeze)).toMatchSnapshot();
+		expect(JSON.stringify(map, preserve)).toMatchSnapshot();
 	});
 
 	test("freezing a Set produces valid JSON", () => {
 		const set = new Set([1, 2, 3]);
 
-		expect(JSON.stringify(set, freeze)).toMatchSnapshot();
+		expect(JSON.stringify(set, preserve)).toMatchSnapshot();
 	});
 
 	test("freezing and hydrating an object should retain deep equality", () => {
-		expect(JSON.parse(JSON.stringify(fresh, freeze), hydrate)).toEqual(fresh);
+		expect(JSON.parse(JSON.stringify(fresh, preserve), restore)).toEqual(fresh);
 	});
 });

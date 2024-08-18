@@ -1,5 +1,5 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`freezing and hydrating freezing a Map produces valid JSON 1`] = `"{"__hydrate_type":"__hydrate_map","items":[[0,"number"],["0","string"],["A","a"],["B","b"],["C","c"]]}"`;
+exports[`freezing and hydrating > freezing a Map produces valid JSON 1`] = `"{"__HydrateType":"Map","items":[[0,"number"],["0","string"],["A","a"],["B","b"],["C","c"]]}"`;
 
-exports[`freezing and hydrating freezing a Set produces valid JSON 1`] = `"{"__hydrate_type":"__hydrate_set","items":[1,2,3]}"`;
+exports[`freezing and hydrating > freezing a Set produces valid JSON 1`] = `"{"__HydrateType":"Set","items":[1,2,3]}"`;

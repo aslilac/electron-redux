@@ -1,11 +1,11 @@
-const { app, BrowserWindow } = require("electron");
-const path = require("path");
-const url = require("url");
+import { app, BrowserWindow } from "electron";
+import { createRequire } from "node:module";
+import * as path from "node:path";
+import { increment, store } from "./store.js";
 
-const { increment, store } = require("../store/main");
+const require = createRequire(import.meta.url);
 
 store.subscribe(() => {
-	// eslint-disable-next-line no-console
 	console.log(store.getState());
 });
 
@@ -27,13 +27,7 @@ const createWindow = () => {
 	});
 
 	// and load the index.html of the app.
-	view.loadURL(
-		url.format({
-			pathname: path.join(__dirname, "../renderer/index.html"),
-			protocol: "file:",
-			slashes: true,
-		}),
-	);
+	view.loadURL(new URL("../renderer/build/index.html", import.meta.url).toString());
 
 	// Open the DevTools.
 	view.webContents.openDevTools();

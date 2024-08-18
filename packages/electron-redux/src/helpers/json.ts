@@ -1,18 +1,21 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+// Ideally this would be a `Symbol`, but those are not JSON serializable.
+const hydrateType = "__HydrateType";
 
 /**
- * Preserves some types like Map and Set when serializing
+ * Preserves `Map` and `Set` values when serializing to JSON.
  */
-export const freeze = (_: string, value: unknown): unknown => {
+export const preserve = (_: string, value: unknown): any => {
 	if (value instanceof Map) {
 		return {
-			__hydrate_type: "__hydrate_map",
-			items: Array.from(value),
+			[hydrateType]: "Map",
+			items: [...value],
 		};
-	} else if (value instanceof Set) {
+	}
+
+	if (value instanceof Set) {
 		return {
-			__hydrate_type: "__hydrate_set",
-			items: Array.from(value),
+			[hydrateType]: "Set",
+			items: [...value],
 		};
 	}
 
@@ -20,23 +23,22 @@ export const freeze = (_: string, value: unknown): unknown => {
 };
 
 /**
- * Hydrates some types like Map and Set when deserializing
+ * Restores `Map` and `Set` value when deserializing from JSON.
  */
-export const hydrate = (_: string, value: any): any => {
-	if (value != null && typeof value === "object") {
-		if ("__hydrate_type" in value) {
-			if (
-				value.__hydrate_type === "__hydrate_map" &&
-				value.items != null &&
-				typeof value.items === "object"
-			) {
-				return new Map(value.items);
-			} else if (
-				value.__hydrate_type === "__hydrate_set" &&
-				Array.isArray(value.items)
-			) {
-				return new Set(value.items);
-			}
+export const restore = (_: string, value: unknown): any => {
+	if (
+		value != null &&
+		typeof value === "object" &&
+		hydrateType in value &&
+		"items" in value &&
+		Array.isArray(value.items)
+	) {
+		if (value[hydrateType] === "Map") {
+			return new Map(value.items);
+		}
+
+		if (value[hydrateType] === "Set") {
+			return new Set(value.items);
 		}
 	}
 

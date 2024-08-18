@@ -1,51 +1,32 @@
-import * as _ from "./_";
+// Ideally this would be a symbol, but each process would get a unique instance.
+const stop = "__ElectronReduxStopForwarding";
 
-// Certain actions that we should never replay across stores
-const blacklist = [/^@@/, /^redux-form/];
-const validActionKeys = ["type", "payload", "error", "meta"];
+// Certain actions that we should never replay across stores.
+const ignored = [/^@@/, /^redux-form/];
 
-export interface FluxStandardAction<
-	Type extends string = string,
-	Payload = undefined,
-	Meta = undefined,
-> {
-	type: Type;
-	error?: boolean;
-	payload?: Payload;
-	meta?: Meta;
+/**
+ * stopForwarding takes an action, and will return a copy that will not be replayed in
+ */
+export function stopForwarding<T extends object>(action: T): T {
+	return {
+		...action,
+		[stop]: true,
+	};
 }
 
-// Gives us just enough action type info to work for the functions below
-export type GenericFluxAction = FluxStandardAction<
-	string,
-	unknown,
-	{ scope?: "local" | string }
->;
-
 /**
- * Determines if an action has an appropriate shape that is safe for forwarding
+ * shouldForward ensures that the action meets the right format and isn't scoped locally
  */
-export const isFSA = (action: any): action is GenericFluxAction =>
-	_.isPlainObject(action) &&
-	_.isString(action["type"]) &&
-	Object.keys(action).every((key) => validActionKeys.includes(key));
+export function shouldForward(action: unknown): boolean {
+	// Not an object, or already marked
+	if (typeof action !== "object" || action == null || stop in action) {
+		return false;
+	}
 
-/**
- * stopForwarding allows you to give it an action, and it will return an
- * equivalent action that will only play in the current process
- */
-export const stopForwarding = (action: GenericFluxAction): GenericFluxAction => ({
-	...action,
-	meta: {
-		...action.meta,
-		scope: "local",
-	},
-});
+	// Check if it should be ignored.
+	if ("type" in action && ignored.some((rule) => rule.test(action.type as string))) {
+		return false;
+	}
 
-/**
- * validateAction ensures that the action meets the right format and isn't scoped locally
- */
-export const validateAction = (action: unknown): action is GenericFluxAction =>
-	isFSA(action) &&
-	action.meta?.scope !== "local" &&
-	blacklist.every((rule) => !rule.test(action.type));
+	return true;
+}

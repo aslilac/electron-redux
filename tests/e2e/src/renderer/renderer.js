@@ -1,4 +1,4 @@
-const { addItem, decrement, increment, store } = require("../store/renderer");
+import { addItem, decrement, increment, store } from "./store";
 
 store.subscribe(() => {
 	const state = store.getState();

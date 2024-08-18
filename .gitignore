@@ -3,6 +3,7 @@
 .idea/
 .nova/
 .vscode/
+.yarn/
 build/
 coverage/
 dist/

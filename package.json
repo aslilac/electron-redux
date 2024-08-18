@@ -11,7 +11,8 @@
 	},
 	"scripts": {
 		":build": "yarn workspace @mckayla/electron-redux build",
-		":fmt": "prettier --ignore-path .gitignore --write .",
+		":fmt": "prettier --write .",
+		":test": "yarn workspaces foreach -A run test",
 		"smoke-test": "yarn workspace @mckayla/electron-redux-e2e-test start"
 	}
 }

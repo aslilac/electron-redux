@@ -1,1 +1,1 @@
-export * from "./build/middleware/syncRenderer";
+export * from "./build/renderer";
